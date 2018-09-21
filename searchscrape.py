@@ -7,17 +7,18 @@ import datetime
 
 
 # edit these three variables
-user = 'weimers'
-start = datetime.datetime(2009, 1, 1)  # year, month, day
-end = datetime.datetime(2018, 9, 6)  # year, month, day
+user = 'Val2018'
+start = datetime.datetime(2017, 9, 9)  # year, month, day
+end = datetime.datetime(2018, 9, 9)  # year, month, day
 
 # only edit these if you're having problems
 delay = 1  # time to wait on each page load before reading the page
-driver = webdriver.Chrome("/Users/hugo.ewald/Downloads/chromedriver")
+driver = webdriver.Chrome("/Users/hugo.ewald/Downloads/chromedriver"
+)  # options are Chrome() Firefox() Safari()
 
 
 # don't mess with this stuff
-twitter_ids_filename = 'all_ids_Weimers.json'
+twitter_ids_filename = 'all_ids_Valet2018.json'
 days = (end - start).days + 1
 id_selector = '.time a.tweet-timestamp'
 tweet_selector = 'li.js-stream-item'
@@ -31,8 +32,10 @@ def format_day(date):
     return '-'.join([year, month, day])
 
 def form_url(since, until):
-    p1 = 'https://twitter.com/search?f=tweets&vertical=default&q=from%3A'
+    p1 = 'https://twitter.com/search?f=tweets&vertical=default&q=%23'
     p2 =  user + '%20since%3A' + since + '%20until%3A' + until + 'include%3Aretweets&src=typd'
+    base_url = u'https://twitter.com/search?q='
+    query = u'%23hadleywickham' + since + '%20until%3A' + until + 'include%3Aretweets&src=typd'
     return p1 + p2
 
 def increment_day(date, i):
@@ -91,4 +94,3 @@ with open(twitter_ids_filename, 'w') as outfile:
 
 print('all done here')
 driver.close()
-

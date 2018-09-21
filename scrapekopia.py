@@ -7,9 +7,9 @@ import datetime
 
 
 # edit these three variables
-user = 'weimers'
-start = datetime.datetime(2009, 1, 1)  # year, month, day
-end = datetime.datetime(2018, 9, 6)  # year, month, day
+user = 'rt_com'
+start = datetime.datetime(2009, 8, 21)  # year, month, day
+end = datetime.datetime(2018, 8, 17)  # year, month, day
 
 # only edit these if you're having problems
 delay = 1  # time to wait on each page load before reading the page
@@ -17,7 +17,7 @@ driver = webdriver.Chrome("/Users/hugo.ewald/Downloads/chromedriver")
 
 
 # don't mess with this stuff
-twitter_ids_filename = 'all_ids_Weimers.json'
+twitter_ids_filename = 'all_ids_Sputnik.json'
 days = (end - start).days + 1
 id_selector = '.time a.tweet-timestamp'
 tweet_selector = 'li.js-stream-item'

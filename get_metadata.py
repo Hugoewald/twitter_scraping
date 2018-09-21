@@ -9,7 +9,7 @@ from tweepy import TweepError
 from time import sleep
 
 # CHANGE THIS TO THE USER YOU WANT
-user = 'realdonaldtrump'
+user = 'AFS2018'
 
 with open('api_keys.json') as f:
     keys = json.load(f)
@@ -22,7 +22,7 @@ output_file = '{}.json'.format(user)
 output_file_short = '{}_short.json'.format(user)
 compression = zipfile.ZIP_DEFLATED
 
-with open('all_ids.json') as f:
+with open('all_ids_AFS2.json') as f:
     ids = json.load(f)
 
 print('total ids: {}'.format(len(ids)))
@@ -42,6 +42,7 @@ for go in range(i):
     tweets = api.statuses_lookup(id_batch)
     for tweet in tweets:
         all_data.append(dict(tweet._json))
+print(tweets)        
 
 print('metadata collection complete')
 print('creating master json file')
@@ -55,6 +56,7 @@ zf.close()
 
 results = []
 
+
 def is_retweet(entry):
     return 'retweeted_status' in entry.keys()
 
@@ -64,10 +66,17 @@ def get_source(entry):
     else:
         return entry["source"]
 
+def screen_name(entry):
+    return entry['user']
+
 with open(output_file) as json_data:
     data = json.load(json_data)
     for entry in data:
         t = {
+            "screen_name": screen_name(entry)['screen_name'],
+            "location": screen_name(entry)['location'],
+            "account_created_at": screen_name(entry)['created_at'],
+            "language": screen_name(entry)['lang'],
             "created_at": entry["created_at"],
             "text": entry["text"],
             "in_reply_to_screen_name": entry["in_reply_to_screen_name"],
@@ -85,9 +94,9 @@ with open(output_file_short, 'w') as outfile:
 
 with open(output_file_short) as master_file:
     data = json.load(master_file)
-    fields = ["favorite_count", "source", "text", "in_reply_to_screen_name", "is_retweet", "created_at", "retweet_count", "id_str"]
+    fields = ["screen_name","location","account_created_at","language","favorite_count", "source", "text", "in_reply_to_screen_name", "is_retweet", "created_at", "retweet_count", "id_str"]
     print('creating CSV version of minimized json master file')
     f = csv.writer(open('{}.csv'.format(user), 'w'))
     f.writerow(fields)
     for x in data:
-        f.writerow([x["favorite_count"], x["source"], x["text"], x["in_reply_to_screen_name"], x["is_retweet"], x["created_at"], x["retweet_count"], x["id_str"]])
+        f.writerow([x["screen_name"],x["location"],x["account_created_at"],x["language"],x["favorite_count"], x["source"], x["text"], x["in_reply_to_screen_name"], x["is_retweet"], x["created_at"], x["retweet_count"], x["id_str"]])
