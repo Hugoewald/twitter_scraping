@@ -1,4 +1,4 @@
-## Hugo Ewald Twitter scraper
+## Hugo Ewalds Twitter scraper
 
 This is my twist on the already fantastic Twitter scraper by bpd27. I've added several other scripts which gives you the possibility tto scrape mentions and search for tweets. They work basically the same as the original scraper.
 
