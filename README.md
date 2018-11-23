@@ -1,3 +1,8 @@
+## Hugo Ewald Twitter scraper
+
+This is my twist on the already fantastic Twitter scraper by bpd27. I've added several other scripts which gives you the possibility tto scrape mentions and search for tweets. They work basically the same as the original scraper.
+
+
 ## Twitter Scraper
 
 Twitter makes it hard to get all of a user's tweets (assuming they have more than 3200). This is a way to get around that using Python, Selenium, and Tweepy.
