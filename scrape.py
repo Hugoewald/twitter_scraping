@@ -7,20 +7,20 @@ import datetime
 
 
 # edit these three variables
-user = 'weimers'
-start = datetime.datetime(2009, 1, 1)  # year, month, day
-end = datetime.datetime(2018, 9, 6)  # year, month, day
+user = '_strindberg'
+start = datetime.datetime(2011, 12, 1)  # year, month, day
+end = datetime.datetime(2020, 8, 9)  # year, month, day
 
 # only edit these if you're having problems
 delay = 1  # time to wait on each page load before reading the page
-driver = webdriver.Chrome("/Users/hugo.ewald/Downloads/chromedriver")
+driver = webdriver.Chrome("/Users/hugo.ewald/chromedriver")
 
 
 # don't mess with this stuff
-twitter_ids_filename = 'all_ids_Weimers.json'
+twitter_ids_filename = 'all_ids.json'
 days = (end - start).days + 1
-id_selector = '.time a.tweet-timestamp'
-tweet_selector = 'li.js-stream-item'
+id_selector = "div > div > :nth-child(2) > :nth-child(2) > :nth-child(1) > div > div > :nth-child(1) > a"
+tweet_selector = 'article'
 user = user.lower()
 ids = []
 
@@ -91,4 +91,3 @@ with open(twitter_ids_filename, 'w') as outfile:
 
 print('all done here')
 driver.close()
-
